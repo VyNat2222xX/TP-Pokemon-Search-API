@@ -1,10 +1,12 @@
 // QUERRY SELECTORS
 const $container = document.querySelector("#pokemon-grid");
 const $counterText = document.querySelector("#count-badge");
+const $badges = document.querySelectorAll(".poke-card");
+const $details = document.querySelector("#detail-content");
 
 // MEMORY
 const APIurl = "https://pokeapi.co/api/v2/pokemon";
-let counter = -1;
+let counter = 1;
 
 // CODE
 document.addEventListener("DOMContentLoaded", async () => {
@@ -23,10 +25,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 		p1.classList.add("poke-id");
 		p2.classList.add("poke-name");
 
-		p1.textContent = "#" + i;
+		if (i < 9) {
+			p1.textContent = "#000" + counter;
+		} else if (i < 99) {
+			p1.textContent = "#00" + counter;
+		} else if (i < 999) {
+			p1.textContent = "#0" + counter;
+		} else {
+			p1.textContent = "#" + counter;
+		}
 		p2.textContent = DATA.results[i].name;
 
 		img.src = "";
+		img.alt = "Image de " + DATA.results[i].name;
 
 		div.appendChild(img);
 		div.appendChild(p1);
@@ -34,6 +45,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 		$container.appendChild(div);
 
 		counter++;
-		$counterText.textContent = counter + " Pokémons";
+		$counterText.textContent = counter - 1 + " Pokémons";
 	}
 });
