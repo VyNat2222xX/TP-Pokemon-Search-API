@@ -3,6 +3,7 @@ const $container = document.querySelector("#pokemon-grid");
 const $counterText = document.querySelector("#count-badge");
 const $badges = document.querySelectorAll(".poke-card");
 const $details = document.querySelector("#detail-content");
+const $detailsEmpty = document.querySelector("#detail-banner");
 
 // MEMORY
 const APIurl = "https://pokeapi.co/api/v2/pokemon";
@@ -10,7 +11,7 @@ let counter = 1;
 
 // CODE
 document.addEventListener("DOMContentLoaded", async () => {
-	const response = await fetch(APIurl + "?limit=1350");
+	const response = await fetch(APIurl + "?limit=1025");
 	const DATA = await response.json();
 
 	console.log(DATA);
@@ -36,7 +37,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 		}
 		p2.textContent = DATA.results[i].name;
 
-		img.src = "";
+		img.src =
+			"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" +
+			[i + 1] +
+			".png";
 		img.alt = "Image de " + DATA.results[i].name;
 
 		div.appendChild(img);
